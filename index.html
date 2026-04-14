@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hafiz Sufyan Ali | Cloud & DevOps Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0e12;
+            --bg-secondary: #111820;
+            --bg-card: #161f28;
+            --accent-cyan: #00f0ff;
+            --accent-purple: #b829dd;
+            --text-primary: #e6f1ff;
+            --text-secondary: #8892b0;
+            --text-muted: #546a7b;
+            --border: #1d2d3d;
+            --gradient-1: #00f0ff;
+            --gradient-2: #0066ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Background Animation */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 240, 255, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(60px);
+        }
+
+        .glow-1 { top: -300px; right: -300px; }
+        .glow-2 { bottom: -300px; left: -300px; background: radial-gradient(circle, rgba(184, 41, 221, 0.1) 0%, transparent 70%); }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 14, 18, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-cyan);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        main {
+            position: relative;
+            z-index: 1;
+        }
+
+        section {
+            padding: 6rem 10%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4rem;
+            padding-top: 8rem;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-greeting {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-cyan);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            display: block;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+            animation: fadeInUp 0.8s ease 0.1s backwards;
+        }
+
+        .hero-title span {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--gradient-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-weight: 400;
+            animation: fadeInUp 0.8s ease 0.2s backwards;
+        }
+
+        .hero-description {
+            color: var(--text-muted);
+            max-width: 500px;
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+            animation: fadeInUp 0.8s ease 0.3s backwards;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            animation: fadeInUp 0.8s ease 0.4s backwards;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: 1px solid var(--accent-cyan);
+            background: transparent;
+            color: var(--accent-cyan);
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent-cyan);
+            transition: left 0.3s;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            left: 0;
+        }
+
+        .btn:hover {
+            color: var(--bg-primary);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+        }
+
+        .btn-primary {
+            background: rgba(0, 240, 255, 0.1);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            margin-top: 3rem;
+            animation: fadeInUp 0.8s ease 0.5s backwards;
+        }
+
+        .stat {
+            border-left: 2px solid var(--border);
+            padding-left: 1rem;
+        }
+
+        .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            color: var(--accent-cyan);
+            font-weight: 700;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .hero-visual {
+            flex: 1;
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .code-window {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            font-family: 'JetBrains Mono', monospace;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .code-window::before {
+            content: '● ● ●';
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            letter-spacing: 0.5rem;
+        }
+
+        .code-content {
+            margin-top: 1.5rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .code-line {
+            display: block;
+            opacity: 0;
+            animation: typeIn 0.5s forwards;
+        }
+
+        .code-line:nth-child(1) { animation-delay: 0.5s; }
+        .code-line:nth-child(2) { animation-delay: 1s; }
+        .code-line:nth-child(3) { animation-delay: 1.5s; }
+        .code-line:nth-child(4) { animation-delay: 2s; }
+        .code-line:nth-child(5) { animation-delay: 2.5s; }
+
+        .keyword { color: var(--accent-purple); }
+        .function { color: var(--accent-cyan); }
+        .string { color: #7ee787; }
+
+        /* Section Headers */
+        .section-header {
+            margin-bottom: 4rem;
+        }
+
+        .section-tag {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-cyan);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-cyan), transparent);
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .about-text {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight {
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .info-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .info-item:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.1);
+        }
+
+        .info-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .info-value {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .skill-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s;
+        }
+
+        .skill-category:hover::before {
+            transform: scaleX(1);
+        }
+
+        .skill-category:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-5px);
+        }
+
+        .skill-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid var(--accent-cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .skill-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .skill-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+        }
+
+        .skill-tag:hover {
+            background: rgba(0, 240, 255, 0.1);
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent-cyan), var(--accent-purple));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -3.35rem;
+            top: 2rem;
+            width: 12px;
+            height: 12px;
+            background: var(--accent-cyan);
+            border: 3px solid var(--bg-primary);
+            box-shadow: 0 0 0 3px var(--accent-cyan);
+        }
+
+        .timeline-item:hover {
+            border-color: var(--accent-cyan);
+            transform: translateX(10px);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .timeline-company {
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+
+        .timeline-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            background: rgba(0, 240, 255, 0.1);
+            padding: 0.3rem 0.8rem;
+        }
+
+        .timeline-location {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .timeline-desc {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 20px 40px rgba(0, 240, 255, 0.1);
+        }
+
+        .project-header {
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.1), transparent);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .project-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tech-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            background: rgba(0, 240, 255, 0.1);
+            color: var(--accent-cyan);
+            padding: 0.2rem 0.6rem;
+            border: 1px solid rgba(0, 240, 255, 0.3);
+        }
+
+        .project-body {
+            padding: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .project-desc {
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s;
+        }
+
+        .project-link:hover {
+            gap: 1rem;
+        }
+
+        /* Education & Certs */
+        .edu-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+        }
+
+        .edu-main {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .edu-main::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 240, 255, 0.03), transparent);
+            transform: rotate(45deg);
+        }
+
+        .edu-degree {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .edu-school {
+            color: var(--accent-cyan);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .edu-detail {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .edu-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .edu-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .edu-value {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .certs-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .cert-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s;
+        }
+
+        .cert-item:hover {
+            border-color: var(--accent-cyan);
+            transform: translateX(5px);
+        }
+
+        .cert-badge {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .cert-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple), var(--accent-cyan));
+            background-size: 200% 100%;
+            animation: gradient 3s linear infinite;
+        }
+
+        .contact-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 2rem;
+            background: rgba(0, 240, 255, 0.05);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .contact-item:hover {
+            background: rgba(0, 240, 255, 0.1);
+            border-color: var(--accent-cyan);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 240, 255, 0.1);
+        }
+
+        .contact-icon {
+            font-size: 1.3rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            margin-top: 4rem;
+        }
+
+        .footer-code {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-cyan);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes typeIn {
+            to { opacity: 1; }
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .edu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            section {
+                padding: 4rem 5%;
+            }
+
+            .contact-container {
+                padding: 2rem;
+            }
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+
+    <nav>
+        <div class="logo">SA.</div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <span class="hero-greeting">Initializing Cloud Environment...</span>
+                <h1 class="hero-title">Sufyan <span>Ali</span></h1>
+                <h2 class="hero-subtitle">Cloud & DevOps Engineer</h2>
+                <p class="hero-description">
+                    Building scalable infrastructure and automating deployments. 
+                    Specialized in AWS cloud services, containerization, and CI/CD pipelines 
+                    with a strong foundation in network engineering.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#projects" class="btn btn-primary">View Projects</a>
+                    <a href="#contact" class="btn">Get in Touch</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-value">3.2</div>
+                        <div class="stat-label">Current CGPA</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">9+</div>
+                        <div class="stat-label">Months Experience</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">AWS</div>
+                        <div class="stat-label">Certified</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="code-window">
+                    <div class="code-content">
+                        <span class="code-line"><span class="keyword">class</span> <span class="function">CloudEngineer</span>:</span>
+                        <span class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span> <span class="function">__init__</span>(<span class="keyword">self</span>):</span>
+                        <span class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">self</span>.name = <span class="string">"Sufyan Ali"</span></span>
+                        <span class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">self</span>.stack = [<span class="string">"AWS"</span>, <span class="string">"Docker"</span>, <span class="string">"K8s"</span>, <span class="string">"Terraform"</span>]</span>
+                        <span class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">self</span>.status = <span class="string">"Ready to Deploy"</span></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="reveal">
+            <div class="section-header">
+                <span class="section-tag">01. About Me</span>
+                <h2 class="section-title">Infrastructure as Code,<br>Passion as Fuel</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        I'm a <span class="highlight">Computer Science undergraduate</span> at the University of Agriculture, Faisalabad, 
+                        with a deep interest in cloud-native technologies and DevOps practices. My journey began with networking 
+                        fundamentals (CCNA) and evolved into cloud architecture and automation.
+                    </p>
+                    <p>
+                        During my internships at <span class="highlight">Cloudlem and Soft Communication</span>, I gained hands-on experience in 
+                        network monitoring, cloud infrastructure, containerization, and CI/CD automation. This foundation 
+                        drives my approach to building resilient, secure, and scalable cloud systems.
+                    </p>
+                    <p>
+                        Currently, I'm focused on containerized application deployment, CI/CD pipeline automation, and AWS infrastructure 
+                        management. I'm actively seeking opportunities to contribute as a <span class="highlight">DevOps/Cloud Engineer</span>.
+                    </p>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Location</div>
+                        <div class="info-value">Chichawatni, Punjab</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Education</div>
+                        <div class="info-value">BS Computer Science</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Email</div>
+                        <div class="info-value">mughalalisufyan8@gmail.com</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Phone</div>
+                        <div class="info-value">03136435828</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="reveal">
+            <div class="section-header">
+                <span class="section-tag">02. Technical Arsenal</span>
+                <h2 class="section-title">Skills & Technologies</h2>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <div class="skill-header">
+                        <div class="skill-icon">☁️</div>
+                        <h3 class="skill-title">Cloud Platforms (AWS)</h3>
+                    </div>
+                    <ul class="skill-list">
+                        <li class="skill-tag">EC2</li><li class="skill-tag">VPC</li><li class="skill-tag">IAM</li>
+                        <li class="skill-tag">ECR</li><li class="skill-tag">ECS</li><li class="skill-tag">S3</li>
+                        <li class="skill-tag">CloudWatch</li><li class="skill-tag">CloudFormation</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-header">
+                        <div class="skill-icon">🐳</div>
+                        <h3 class="skill-title">DevOps & Containers</h3>
+                    </div>
+                    <ul class="skill-list">
+                        <li class="skill-tag">Docker</li><li class="skill-tag">Docker Compose</li>
+                        <li class="skill-tag">Kubernetes (K8s)</li><li class="skill-tag">Kind</li>
+                        <li class="skill-tag">Terraform (IaC)</li><li class="skill-tag">Jenkins CI/CD</li>
+                        <li class="skill-tag">GitHub Actions</li><li class="skill-tag">GitLab CI</li>
+                        <li class="skill-tag">Automation</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-header">
+                        <div class="skill-icon">🌐</div>
+                        <h3 class="skill-title">Networking</h3>
+                    </div>
+                    <ul class="skill-list">
+                        <li class="skill-tag">CCNA</li><li class="skill-tag">TCP/IP</li><li class="skill-tag">LAN/WAN</li>
+                        <li class="skill-tag">VPC Networking</li><li class="skill-tag">Routing & Switching</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-header">
+                        <div class="skill-icon">💻</div>
+                        <h3 class="skill-title">Development</h3>
+                    </div>
+                    <ul class="skill-list">
+                        <li class="skill-tag">Python (OOP)</li><li class="skill-tag">Linux Admin</li>
+                        <li class="skill-tag">Git</li><li class="skill-tag">Bash Scripting</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="reveal">
+            <div class="section-header">
+                <span class="section-tag">03. Experience</span>
+                <h2 class="section-title">Professional Journey</h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div>
+                            <h3 class="timeline-title">Cloud/DevOps Intern</h3>
+                            <div class="timeline-company">Cloudlem</div>
+                        </div>
+                        <span class="timeline-date">Feb 2025 - Apr 2025</span>
+                    </div>
+                    <div class="timeline-location">📍 Remote</div>
+                    <p class="timeline-desc">
+                        Worked on cloud infrastructure automation and containerization. Assisted in deploying scalable solutions using Docker, Kubernetes (Kind), and CI/CD workflows (Jenkins & GitHub Actions). Gained hands-on experience with Terraform for infrastructure as code and contributed to real-world DevOps pipelines.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div>
+                            <h3 class="timeline-title">Assistant Network Manager</h3>
+                            <div class="timeline-company">Soft Communication</div>
+                        </div>
+                        <span class="timeline-date">Jun 2024 - Sep 2024</span>
+                    </div>
+                    <div class="timeline-location">📍 Lahore, Punjab</div>
+                    <p class="timeline-desc">
+                        Monitored network infrastructure and troubleshot LAN/WAN connectivity issues. Assisted senior engineers in maintaining secure and reliable enterprise network infrastructure. Implemented security protocols and provided technical support for IT operations.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="reveal">
+            <div class="section-header">
+                <span class="section-tag">04. Featured Work</span>
+                <h2 class="section-title">Projects</h2>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">🐳</div>
+                        <h3 class="project-title">Two-Tier Application Deployment using Docker</h3>
+                        <div class="project-tech">
+                            <span class="tech-tag">Docker</span><span class="tech-tag">Docker Compose</span><span class="tech-tag">Linux</span><span class="tech-tag">Git</span>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-desc">Containerized a two-tier application using custom Dockerfiles and Docker Compose. Configured networking & persistent volumes to achieve scalable, isolated deployment.</p>
+                        <div class="project-links"><a href="https://github.com/sufyanali1307" class="project-link">View on GitHub →</a></div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">⚙️</div>
+                        <h3 class="project-title">CI/CD Pipeline Implementation using Jenkins</h3>
+                        <div class="project-tech">
+                            <span class="tech-tag">Jenkins</span><span class="tech-tag">Docker</span><span class="tech-tag">GitHub</span><span class="tech-tag">Docker Hub</span>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-desc">Automated build and deployment pipeline with Jenkins integrated with GitHub. Auto-builds Docker images on code commit and pushes to Docker Hub, reducing manual errors and enabling faster updates.</p>
+                        <div class="project-links"><a href="https://github.com/sufyanali1307" class="project-link">View on GitHub →</a></div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">💊</div>
+                        <h3 class="project-title">Cloud-Based Medicine Inventory</h3>
+                        <div class="project-tech">
+                            <span class="tech-tag">AWS</span><span class="tech-tag">Docker</span><span class="tech-tag">CI/CD</span><span class="tech-tag">Python</span>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-desc">Final Year Project: Scalable inventory system for clinics using Docker, AWS ECS, and automated CI/CD pipelines for high availability.</p>
+                        <div class="project-links"><a href="https://github.com/sufyanali1307" class="project-link">View on GitHub →</a></div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">⚡</div>
+                        <h3 class="project-title">AWS Infrastructure Automation</h3>
+                        <div class="project-tech">
+                            <span class="tech-tag">CloudFormation</span><span class="tech-tag">EC2</span><span class="tech-tag">VPC</span><span class="tech-tag">Python</span>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-desc">Automated AWS deployment with CloudFormation templates, Python scripts for monitoring, and secure VPC networking.</p>
+                        <div class="project-links"><a href="https://github.com/sufyanali1307" class="project-link">View on GitHub →</a></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="reveal">
+            <div class="section-header">
+                <span class="section-tag">05. Education & Certs</span>
+                <h2 class="section-title">Academic Background</h2>
+            </div>
+            <div class="edu-grid">
+                <div class="edu-main">
+                    <div class="edu-degree">Bachelor of Science in Computer Science</div>
+                    <div class="edu-school">University of Agriculture, Faisalabad</div>
+                    <p style="color: var(--text-secondary); margin: 1rem 0;">Focus on Cloud Computing and DevOps. Strong foundation in software engineering, networking, and system administration.</p>
+                    <div class="edu-detail">
+                        <div class="edu-item"><span class="edu-label">Duration</span><span class="edu-value">Sept 2022 - Sept 2026</span></div>
+                        <div class="edu-item"><span class="edu-label">Current CGPA</span><span class="edu-value" style="color: var(--accent-cyan);">3.2 / 4.0</span></div>
+                    </div>
+                </div>
+
+                <div class="certs-list">
+                    <div class="cert-item"><div class="cert-badge">🏆</div><div class="cert-name">AWS Academy Graduate - Cloud Foundations</div></div>
+                    <div class="cert-item"><div class="cert-badge">🌐</div><div class="cert-name">CCNA (Cisco Certified Network Associate)</div></div>
+                    <div class="cert-item"><div class="cert-badge">📜</div><div class="cert-name">HEC National Skill Competency Test</div></div>
+                    <div class="cert-item"><div class="cert-badge">✨</div><div class="cert-name">Gemini Certified Educator</div></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="reveal">
+            <div class="contact-container">
+                <h2 class="contact-title">Let's Build Something Scalable</h2>
+                <p class="contact-subtitle">Seeking DevOps/Cloud Engineering roles. Open to collaborating on cloud-native infrastructure and automation.</p>
+                <div class="contact-links">
+                    <a href="mailto:mughalalisufyan8@gmail.com" class="contact-item"><span class="contact-icon">📧</span> mughalalisufyan8@gmail.com</a>
+                    <a href="tel:03136435828" class="contact-item"><span class="contact-icon">📱</span> 03136435828</a>
+                    <a href="https://linkedin.com/in/hafiz-sufyan-ali-65791b297" target="_blank" class="contact-item"><span class="contact-icon">💼</span> LinkedIn</a>
+                    <a href="https://github.com/sufyanali1307" target="_blank" class="contact-item"><span class="contact-icon">💻</span> GitHub</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Designed & Built with <span style="color: var(--accent-cyan);">⚡</span> by Hafiz Sufyan Ali</p>
+        <p class="footer-code">deployed_on = "AWS Cloud" // status = "Running"</p>
+    </footer>
+
+    <script>
+        const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+        const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); }); }, observerOptions);
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => { anchor.addEventListener('click', function (e) { e.preventDefault(); document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' }); }); });
+        document.addEventListener('mousemove', (e) => { const mouseX = e.clientX / window.innerWidth, mouseY = e.clientY / window.innerHeight; document.querySelector('.glow-1').style.transform = `translate(${mouseX * 50}px, ${mouseY * 50}px)`; document.querySelector('.glow-2').style.transform = `translate(${-mouseX * 50}px, ${-mouseY * 50}px)`; });
+    </script>
+</body>
+</html>
